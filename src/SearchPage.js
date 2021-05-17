@@ -1,8 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import './App.css'
+import PropTypes from 'prop-types'
+import Book from './Book'
 
-const SearchPage = ({}) => {
+class SearchPage extends React.Component {
+  static propTypes = {
+    books: PropTypes.array.isRequired,
+  }
+  
+ render() {
+   const { books } = this.props
+   
     return (
 
           <div className="search-books">
@@ -24,9 +33,24 @@ const SearchPage = ({}) => {
               </div>
             </div>
             <div className="search-books-results">
-              <ol className="books-grid"></ol>
+    
+       <ol className="books-grid">
+    
+             <li>
+                       { 
+           books.map(book => (
+             <li key={book.id}>
+               <Book book={book}/>
+             </li>
+           ))}
+             </li>
+   
+      
+
+
+</ol>
             </div>
           </div>
-  )}
+  )}}
 
 export default SearchPage
