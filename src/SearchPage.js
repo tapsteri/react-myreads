@@ -23,7 +23,8 @@ class SearchPage extends React.Component {
            if(shelfBook) {
              book.shelf = shelfBook.shelf
            } else {
-             book.shelf = "none"           }
+             book.shelf = "none"
+           }
          })
          this.setState({searchBookList:data})
        }
