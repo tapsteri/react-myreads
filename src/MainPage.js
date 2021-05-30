@@ -4,37 +4,34 @@ import BookShelf from './BookShelf'
 import PropTypes from 'prop-types'
 
 
-const MainPage = ({ books }) => {
-    return (
-
-      
-      <div className="list-books">
-            <Link to="/search">
-              <button>Search</button>
-            </Link>
-            <div className="list-books-content">
-              <div>
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Currently Reading</h2>
-                  <BookShelf books={books}/>
-                </div>
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Want to Read</h2>
-      
-                </div>
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Read</h2>
-               
-                </div>
-              </div>
-            </div>
+const MainPage = ({ books, changeBookShelf }) => {
+  return (
+    <div className="list-books">
+      <div className="list-books-content">
+        <div>
+          <div className="bookshelf">
+            <h2 className="bookshelf-title">Currently Reading</h2>
+            <BookShelf books={books} changeBookShelf={changeBookShelf} shelf={"currentlyReading"}/>
           </div>
-
-
+          <div className="bookshelf">
+            <h2 className="bookshelf-title">Want to Read</h2>
+            <BookShelf books={books} changeBookShelf={changeBookShelf} shelf={"wantToRead"}/>
+          </div>
+          <div className="bookshelf">
+            <h2 className="bookshelf-title">Read</h2>
+            <BookShelf books={books} changeBookShelf={changeBookShelf} shelf={"read"}/>
+          </div>
+        </div>
+      </div>
+      <div className="open-search">
+        <Link to="/search"></Link>
+      </div>
+    </div>
 )}
 
 MainPage.propTypes = {
-  books: PropTypes.array
+  books: PropTypes.array.isRequired,
+  changeBookShelf: PropTypes.func.isRequired
 }
 
 export default MainPage
