@@ -13,9 +13,7 @@ class BooksApp extends React.Component {
   getAll = () => {
     BooksAPI.getAll()
       .then((books) => {
-        this.setState(() => ({
-          books
-        }))
+        this.setState({books})
     })
   }
   
@@ -32,7 +30,7 @@ class BooksApp extends React.Component {
   render() {
     return (
       <Router>
-        <div classname="app">
+        <div className="app">
           <h1 className="list-books-title">MyReads</h1>
           <Route exact path='/' render={() => (<MainPage books={this.state.books} changeBookShelf={this.changeBookShelf}/>)}/>
           <Route path='/search' render={() => (<SearchPage books={this.state.books} changeBookShelf={this.changeBookShelf}/>)}/>

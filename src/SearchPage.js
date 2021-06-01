@@ -15,7 +15,7 @@ class SearchPage extends React.Component {
      this.setState({searchBookList: []})
    } else {
      BooksAPI.search(query).then(data => {
-       if(data === undefined || data.lenght < 1) {
+       if(data === undefined || data.items < 1) {
          this.setState({searchBookList: []})
        } else {
          data.forEach(book => {
@@ -26,17 +26,23 @@ class SearchPage extends React.Component {
              book.shelf = "none"
            }
          })
-         this.setState({searchBookList:data})
+        this.setState({searchBookList:data}) 
        }
    })
    }
  } 
   
- updateSearch = (query) => {
+ updateSearch = (query) => { 
    this.setState({query})
    this.searchBooks(query)
  }
-  
+    
+ changeBookShelf = (book, bookshelf) => {
+   this.props.changeBookShelf(book, bookshelf)
+   const changedBook = this.state.searchBookList.find(({ id }) => book.id === id);
+   changedBook.shelf = bookshelf
+ }
+   
  render() {
    const { searchBookList, query} = this.state
    
@@ -51,20 +57,18 @@ class SearchPage extends React.Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            <li> { query ? 
+             { query ? 
               searchBookList.map(book => (
                 <li key={book.id}>
-                  <Book book={book} changeBookShelf={this.props.changeBookShelf} 
+                  <Book book={book} changeBookShelf={this.changeBookShelf} 
                   shelf={book.shelf}/>
                 </li>
               )) : <p></p>
-              }
-            </li>
+           }
           </ol>
         </div>
      </div>
 )}}
-
 
 SearchPage.propTypes = {
   books: PropTypes.array.isRequired,

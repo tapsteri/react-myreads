@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 const BookShelfChanger = ({ book, changeBookShelf }) => {
   
   const handleChange = (e) => {
+    e.preventDefault()
     changeBookShelf(book, e.target.value)
   }
   

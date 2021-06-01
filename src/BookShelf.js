@@ -7,13 +7,13 @@ const BookShelf = ({ books, changeBookShelf, shelf }) => {
   return (
     <div className="bookshelf-books">
       <ol className="books-grid">
-        <li>{ 
+       { 
            books.filter(book => book.shelf === shelf).map(book => (
              <li key={book.id}>
                 <Book book={book} changeBookShelf={changeBookShelf} shelf={shelf}/>
              </li>  
            ))}
-        </li>   
+    
       </ol>
     </div>
 )}
